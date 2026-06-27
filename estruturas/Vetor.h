@@ -15,12 +15,43 @@ public:
 	vetor() : cap(1), len(0), arr(new T[1]) {}
 
 	// construtores inicializados
-	vetor(int init_len) : cap(init_len), len(init_len), arr(new T[init_len]) {}
+	vetor(int init_len) : cap(init_len), len(init_len), arr(new T[init_len]()) {}
 
 	vetor(int init_len, T val) : cap(init_len), len(init_len), arr(new T[init_len]) {
 		for (int i = 0; i < len; ++i) {
 			arr[i] = val;
 		}
+	}
+
+	// se passar uma copia ocorre oq? (Rhuan: é algo a se pensar)
+	vetor(const vetor& copia) : cap(copia.cap), len(copia.len), arr(new T[copia.cap]) {
+		for (int i = 0; i < len; ++i) {
+			arr[i] = copia.arr[i];
+		}
+	}
+
+	// Perguntei pra uma IA se faltava algo e ela mencionou um tal de "Rule of Three"
+	/* ??? se você define qualquer um entre destrutor,
+	 * construtor de cópia e operador de atribuição, você
+	 * quase sempre precisa definir os três. ??? */
+	// ou seja, eu só tinha lembrado da primeira regra kk
+	// (nem sabia q era regra...)
+
+	// "homens. Destruam tudo e todos. Ataquem o templo de Atena."
+	// (Destrutor, a primeira regra esquecida :3)
+	~vetor() { delete[] arr; }
+
+	// Operador de atribuição (a segunda regra esquecida :3)
+	vetor& operator=(const vetor& outro) {
+		if (this == outro) return *this;
+		delete[] arr;
+		cap = outro.cap;
+		len = outro.len;
+		arr = new T[cap];
+		for (int i = 0; i < len; ++i) {
+			arr[i] = outro.arr[i];
+		}
+		return *this;
 	}
 
 	// eu ouvi dizer que é importante diferenciar o operador [] const e não-const, falta estudar o pq agora :P

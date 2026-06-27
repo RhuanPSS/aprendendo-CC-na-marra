@@ -15,6 +15,7 @@ int main() {
 		cout << i + 2 << ' ';
 	}
 	cout << '\n'; // meu std::vector da Alienxpress tá funfando :D (eu acho)
+	// (Tempo depois eu voltei aqui e descobri q tava bugado)
 
 	return 0;
 }
