@@ -1,21 +1,21 @@
 #include <iostream>
 #include "estruturas/Vetor.h"
+#include "algoritmos/InsertionSort.h"
 using namespace std;
 
 int main() {
 	// bo depurar as parada na main
 
-	int n;
-	cin >> n;
-	vetor<int> vet(n);
-	for (int& i : vet) {
-		cin >> i;
-	}
-	for (int i : vet) {
-		cout << i + 2 << ' ';
-	}
-	cout << '\n'; // meu std::vector da Alienxpress tá funfando :D (eu acho)
-	// (Tempo depois eu voltei aqui e descobri q tava bugado)
+	vetor<int> vet;
+	vet.push_back(3);
+	vet.push_back(1);
+	vet.push_back(2);
+	vet.push_back(5);
+	vet.push_back(4);
+
+	inSort(vet.begin(), vet.end());
+	for (int i : vet) cout << i << ' ';
+	cout << '\n';
 
 	return 0;
 }
